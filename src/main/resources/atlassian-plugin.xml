@@ -8,25 +8,73 @@
     </plugin-info>
 
     <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="jira-essentials"/>
+    <resource type="i18n" name="i18n" location="jira_essentials"/>
     
     <!-- add our web resources -->
-    <web-resource key="jira-essentials-resources" name="jira-essentials Web Resources">
+    <web-resource key="jira_essentials-resources" name="jira_essentials Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         
-        <resource type="download" name="jira-essentials.css" location="/css/jira-essentials.css"/>
-        <resource type="download" name="jira-essentials.js" location="/js/jira-essentials.js"/>
+        <resource type="download" name="jira_essentials.css" location="/css/jira_essentials.css"/>
+        <resource type="download" name="jira_essentials.js" location="/js/jira_essentials.js"/>
         <resource type="download" name="images/" location="/images"/>
 
-        <context>jira-essentials</context>
+        <context>jira_essentials</context>
     </web-resource>
-    
-    <!-- publish our component -->
-    <component key="myPluginComponent" class="de.affinitas.jira-essentials.MyPluginComponentImpl" public="true">
-        <interface>de.affinitas.jira-essentials.MyPluginComponent</interface>
+
+    <!-- Custom Fields -->
+
+    <!-- Searches -->
+
+    <!-- Functions -->
+    <workflow-function key="TransitionLinkedIssue-function"
+                       name="Transition linked issue"
+                       class="de.affinitas.jira_essentials.functions.TransitionLinkedIssueFunction">
+        <description>
+            Transition issue's linked issue.
+        </description>
+
+        <function-class>
+            de.affinitas.jira_essentials.functions.TransitionLinkedIssueFunction
+        </function-class>
+
+        <orderable>true</orderable>
+        <unique>false</unique>
+        <deletable>true</deletable>
+
+        <resource type="velocity" name="view"
+                  location="templates/jira/workflow/function/TransitionLinkedIssue-function-view.vm" />
+        <resource type="velocity" name="input-parameters"
+                  location="templates/jira/workflow/function/TransitionLinkedIssue-function-edit.vm" />
+        <resource type="velocity" name="edit-parameters"
+                  location="templates/jira/workflow/function/TransitionLinkedIssue-function-edit.vm" />
+    </workflow-function>
+
+    <!-- Reports -->
+
+    <!-- Portlets -->
+
+    <!-- Issue Panels -->
+
+    <!-- helpers -->
+    <component key="conditionCheckerFactory"
+               class="com.googlecode.jsu.helpers.ConditionCheckerFactory"
+               interface="com.googlecode.jsu.helpers.ConditionCheckerFactory" public="true">
+
+        <description>Provide service for checking conditions</description>
     </component>
-    
-    <!-- import from the product container -->
-    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
-    
+
+    <component key="fieldCollectionsUtils"
+               class="com.googlecode.jsu.util.FieldCollectionsUtils"
+               interface="com.googlecode.jsu.util.FieldCollectionsUtils" public="false">
+
+        <description>This utils class exposes common methods to get field collections</description>
+    </component>
+
+    <component key="workflowUtils"
+               class="com.googlecode.jsu.util.WorkflowUtils"
+               interface="com.googlecode.jsu.util.WorkflowUtils" public="true">
+
+        <description>Workflow utils</description>
+    </component>
+
 </atlassian-plugin>

@@ -1,0 +1,13 @@
+<tr bgcolor=ffffff>
+    <td align="right" valign="top" bgcolor="fffff0">
+        <span class="label">Transition:</span>
+    </td>
+    <td bgcolor="ffffff" nowrap>
+#if ($transition)
+		<input id="transition" name="transition" type="text" value="${transition}" />
+#else
+		<input id="transition" name="transition" type="text" />
+#end
+        <br><font size="1">Type the name or ID of the transition to trigger on the parent issue.</font>
+    </td>
+</tr>

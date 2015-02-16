@@ -1,0 +1,7 @@
+Transition <b>
+#if(${transition})
+  $textutils.htmlEncode(${transition})
+#else
+<i>undefined</i>
+#end
+</b> will be triggered on the issue's parent issue.
