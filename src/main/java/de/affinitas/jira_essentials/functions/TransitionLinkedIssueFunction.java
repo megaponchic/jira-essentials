@@ -1,24 +1,24 @@
 package de.affinitas.jira_essentials.functions;
 
-        import java.util.Collection;
-        import java.util.Iterator;
-        import java.util.Map;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
-        import com.atlassian.jira.component.ComponentAccessor;
-        import com.atlassian.jira.issue.Issue;
-        import com.atlassian.jira.issue.MutableIssue;
-        import com.atlassian.jira.issue.util.IssueChangeHolder;
-        import com.atlassian.jira.util.ErrorCollection;
-        import com.atlassian.jira.util.ImportUtils;
-        import com.atlassian.jira.bc.issue.IssueService;
-        import com.atlassian.jira.util.JiraUtils;
-        import com.atlassian.jira.plugin.ComponentClassManager;
-        import com.atlassian.jira.workflow.*;
-        import com.opensymphony.module.propertyset.PropertySet;
-        import com.opensymphony.workflow.WorkflowException;
-        import com.opensymphony.workflow.loader.ActionDescriptor;
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
+import com.atlassian.jira.component.ComponentAccessor;
+import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.util.IssueChangeHolder;
+import com.atlassian.jira.util.ErrorCollection;
+import com.atlassian.jira.util.ImportUtils;
+import com.atlassian.jira.bc.issue.IssueService;
+import com.atlassian.jira.util.JiraUtils;
+import com.atlassian.jira.plugin.ComponentClassManager;
+import com.atlassian.jira.workflow.*;
+import com.opensymphony.module.propertyset.PropertySet;
+import com.opensymphony.workflow.WorkflowException;
+import com.opensymphony.workflow.loader.ActionDescriptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TransitionLinkedIssueFunction extends AbstractPreserveChangesPostFunction {
     private Logger log = LoggerFactory.getLogger(TransitionLinkedIssueFunction.class);
@@ -94,6 +94,9 @@ public class TransitionLinkedIssueFunction extends AbstractPreserveChangesPostFu
                 workflowTransitionUtil.setIssue(parentIssue);
                 workflowTransitionUtil.setUserkey(this.getCallerUser(transientVars, args).getKey());
                 workflowTransitionUtil.setAction(transition.getId());
+
+                // Do it this way after
+                //parentIssue.setStatusId(issue.getStatusObject().getId());
 
                 // validate and transition issue
                 ErrorCollection errorCollection = workflowTransitionUtil.validate();
